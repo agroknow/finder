@@ -36,7 +36,14 @@
 		<div class="col-xs-12 col-sm-12 col-md-12" style="text-align: center;" >
 			<a href="{{item_resource_url}}" class="btn btn-sm btn-default" target=_blank >{{languages.access_the_resource || 'Access the resource' }}</a>
 		</div>
-
+		<ul class="socialbuttons">
+	        <li>
+	            <a facebook-feed-share class="facebookShare facebook-big" data-name="{{item_title}}" data-url="{{curr_url}}" data-shares='shares' data-description="{{item_abstract}}" data-picture="">{{ shares }}</a>
+	        </li>
+	        <li>
+	            <a class="twitter-big" onclick="tweetPopup(this);" href="javascript:void(0);" data-text="{{item_title + '-' + item_abstract | cut:true:130-curr_url.length:'...'}}" data-url="{{curr_url}}" data-via="">Tweet <span id="twitterCount"></span></a>
+	        </li>
+    	</ul>
 	</article>
 
 </article>
