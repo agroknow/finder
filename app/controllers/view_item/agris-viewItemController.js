@@ -78,6 +78,7 @@ listing.controller("agris-viewItemController", function($scope, $http, $location
 		.success(function(data) {
 			//parse array and create an JS Object Array
 			//every item is a JSON
+			$scope.curr_url = $location.absUrl();
 			var thisJson = data.results[0];
 			console.log(thisJson);
 			//WE USE ONLY 'EN' FOR NOW
@@ -118,7 +119,8 @@ listing.controller("agris-viewItemController", function($scope, $http, $location
 
 			//LANGUAGE
 			thisJson.expressions[0].language !== undefined ? $scope.item_language = language_mapping[thisJson.expressions[0].language] : $scope.item_language = '-';
-
+			
+			socialGetter.getTwitterCount($scope.curr_url, 'twitterCallback');
 			//PAGES
 			thisJson.expressions[0].manifestations[0].size !== undefined ? $scope.item_pages = thisJson.expressions[0].manifestations[0].size : $scope.item_pages = '-';
 			console.log(thisJson.expressions[0].manifestations[0]);

@@ -42,6 +42,7 @@ listing.controller("viewItemController", function($rootScope, $scope, $http, $lo
 		.success(function(data) {
 			//parse array and create a JS Object Array
 			//every item is a JSON
+			$scope.curr_url = $location.absUrl();
 			var thisJson = data.results[0];
 
 			//used to get the first available language in case we don't have en.
@@ -121,6 +122,7 @@ listing.controller("viewItemController", function($rootScope, $scope, $http, $lo
 			//url
 			if(thisJson.expressions[0].manifestations[0].items[0].url != undefined) {
 				$scope.item_resource_url = thisJson.expressions[0].manifestations[0].items[0].url;
+				socialGetter.getTwitterCount($scope.curr_url, 'twitterCallback');
 			}
 
 			//rights
