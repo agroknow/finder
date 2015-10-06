@@ -4,13 +4,41 @@
 */
 
 
-//Define ng-app module
-//----
-//services needed 'ngRoute', 'ui.bootstrap'
-var listing = angular.module('akListing',['ngRoute', 'ui.bootstrap']);
+/*Define ng-app module*/
+var listing = angular.module('akListing',['ngRoute', 'ui.bootstrap', 'djds4rce.angular-socialshare']);
 /* var listing = angular.module('akListing',['ngRoute','mainController','listingController']); */
 
-//Shared Properties Service
+angular.module('akListing').run(function($FB){
+  $FB.init('625422610928827');
+});
+/* $locationProvider Configuration */
+/*
+listing.config(['$locationProvider',
+	function($locationProvider) {
+		$locationProvider.html5Mode(true)
+	}]);
+*/
+listing.filter('cut', function () {
+        return function (value, wordwise, max, tail) {
+            if (!value) return '';
+
+            max = parseInt(max, 10);
+            if (!max) return value;
+            if (value.length <= max) return value;
+
+            value = value.substr(0, max);
+            if (wordwise) {
+                var lastspace = value.lastIndexOf(' ');
+                if (lastspace != -1) {
+                    value = value.substr(0, lastspace);
+                }
+            }
+
+            return value + (tail || ' …');
+        };
+    });
+
+/* Shared Properties Service */
 listing.service('sharedProperties',
 	function () {
 	    var total = 0;
